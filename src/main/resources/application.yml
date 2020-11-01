@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+          group: outputGroup
+          destination: kafka-topic
+          contentType: application/json
+          consumer:
+            concurrency: 3
+            partitioned: true
