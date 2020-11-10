@@ -1,9 +1,8 @@
-package dev.shermende.kafkaretry;
+package dev.shermende.kafkadlqretry;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class KafkaRetryApplicationTests {
 
     @Test
