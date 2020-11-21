@@ -1,11 +1,29 @@
+#
+version: @project.version@
+#
+server:
+  port: 6532
+#
 spring:
-  cloud:
-    stream:
-      bindings:
-        input:
-          group: outputGroup
-          destination: kafka-topic
-          contentType: application/json
-          consumer:
-            concurrency: 3
-            partitioned: true
+  application:
+    name: kafka-dlq-retry
+  profiles:
+    active: default
+  kafka:
+    consumer:
+      group-id: ${spring.application.name}
+#
+management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    jmx:
+      exposure:
+        include: "*"
+    web:
+      exposure:
+        include: "*"
