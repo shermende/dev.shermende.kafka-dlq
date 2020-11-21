@@ -1,6 +1,6 @@
 package dev.shermende.kafkadlqretry.configuration.properties;
 
-import dev.shermende.kafkadlqretry.model.KafkaDlqRetryConsumer;
+import dev.shermende.kafkadlqretry.model.DlqRetryConsumer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,5 +16,5 @@ import java.util.List;
 @AllArgsConstructor
 public class KafkaDlqRetryProperties implements Serializable {
     @Valid
-    private List<KafkaDlqRetryConsumer> consumers;
+    private List<DlqRetryConsumer> consumers;
 }

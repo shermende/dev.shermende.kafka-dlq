@@ -1,8 +1,8 @@
 package dev.shermende.kafkadlqretry.service.impl;
 
-import dev.shermende.kafkadlqretry.aop.annotation.Logging;
+import dev.shermende.kafkadlqretry.aop.annotation.Profiling;
 import dev.shermende.kafkadlqretry.converter.ConsumerRecordErrorConverter;
-import dev.shermende.kafkadlqretry.model.KafkaDlqRetryConsumer;
+import dev.shermende.kafkadlqretry.model.DlqRetryConsumer;
 import dev.shermende.kafkadlqretry.service.ConsumerRecordBatchService;
 import dev.shermende.kafkadlqretry.service.DlqRetryConsumerService;
 import dev.shermende.kafkadlqretry.service.NotificationService;
@@ -22,14 +22,15 @@ public class ConsumerRecordBatchErrorService implements ConsumerRecordBatchServi
     private final DlqRetryConsumerService dlqRetryConsumerService;
     private final ConsumerRecordErrorConverter errorConverter;
 
-    @Logging
+    @Profiling
     @Override
     public void process(
         List<ConsumerRecord<Object, Object>> records
     ) {
         final ConsumerRecord<Object, Object> record = records.stream().findFirst().orElseThrow();
-        final KafkaDlqRetryConsumer consumer = dlqRetryConsumerService.findOneByTopic(record.topic()).orElseThrow();
+        final DlqRetryConsumer consumer = dlqRetryConsumerService.findOneByTopic(record.topic()).orElseThrow();
         records.forEach(var -> notificationService.send(errorConverter.convert(consumer, var)));
+        log.info("[Processed as error in batch-mode] [Rows:{}]", records.size());
     }
 
 }

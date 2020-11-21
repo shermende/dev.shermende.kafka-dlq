@@ -1,8 +1,8 @@
 package dev.shermende.kafkadlqretry.converter.impl;
 
-import dev.shermende.kafkadlqretry.aop.annotation.Logging;
+import dev.shermende.kafkadlqretry.aop.annotation.Profiling;
 import dev.shermende.kafkadlqretry.converter.ConsumerRecordRetryConverter;
-import dev.shermende.kafkadlqretry.model.KafkaDlqRetryConsumer;
+import dev.shermende.kafkadlqretry.model.DlqRetryConsumer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ConsumerRecordRetryConverterImpl implements ConsumerRecordRetryConverter {
 
-    @Logging
+    @Profiling
     @Override
     public ProducerRecord<Object, Object> convert(
         int counter,
-        KafkaDlqRetryConsumer consumer,
+        DlqRetryConsumer consumer,
         ConsumerRecord<Object, Object> record
     ) {
         final ProducerRecord<Object, Object> producerRecord =

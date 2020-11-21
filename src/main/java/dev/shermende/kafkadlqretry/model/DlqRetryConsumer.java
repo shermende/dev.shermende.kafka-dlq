@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class KafkaDlqRetryConsumer implements Serializable {
+public class DlqRetryConsumer implements Serializable {
     /**
      *
      */

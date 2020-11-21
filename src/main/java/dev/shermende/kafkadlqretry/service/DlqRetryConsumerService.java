@@ -1,11 +1,11 @@
 package dev.shermende.kafkadlqretry.service;
 
-import dev.shermende.kafkadlqretry.model.KafkaDlqRetryConsumer;
+import dev.shermende.kafkadlqretry.model.DlqRetryConsumer;
 
 import java.util.Optional;
 
 public interface DlqRetryConsumerService {
 
-    Optional<KafkaDlqRetryConsumer> findOneByTopic(String topic);
+    Optional<DlqRetryConsumer> findOneByTopic(String topic);
 
 }

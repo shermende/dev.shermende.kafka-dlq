@@ -1,8 +1,8 @@
 package dev.shermende.kafkadlqretry.listener;
 
-import dev.shermende.kafkadlqretry.aop.annotation.Logging;
+import dev.shermende.kafkadlqretry.aop.annotation.Profiling;
 import dev.shermende.kafkadlqretry.factory.impl.ConsumerRecordBatchServiceFactory;
-import dev.shermende.kafkadlqretry.model.KafkaDlqRetryConsumer;
+import dev.shermende.kafkadlqretry.model.DlqRetryConsumer;
 import dev.shermende.kafkadlqretry.service.DlqRetryConsumerService;
 import dev.shermende.kafkadlqretry.service.impl.ConsumerRecordBatchErrorService;
 import dev.shermende.kafkadlqretry.util.AppUtil;
@@ -23,14 +23,14 @@ public class BatchDlqMessageListener implements BatchMessageListener<Object, Obj
     private final ConsumerRecordBatchErrorService errorService;
     private final ConsumerRecordBatchServiceFactory serviceFactory;
 
-    @Logging
+    @Profiling
     @Override
     public void onMessage(
         List<ConsumerRecord<Object, Object>> records
     ) {
         try {
             final ConsumerRecord<Object, Object> record = records.stream().findFirst().orElseThrow();
-            final KafkaDlqRetryConsumer consumer = dlqRetryConsumerService.findOneByTopic(record.topic()).orElseThrow();
+            final DlqRetryConsumer consumer = dlqRetryConsumerService.findOneByTopic(record.topic()).orElseThrow();
             final int counter = AppUtil.extractCounter(consumer, record);
             serviceFactory.getInstance(counter >= consumer.getDelays().size()).process(records);
         } catch (Exception e) {

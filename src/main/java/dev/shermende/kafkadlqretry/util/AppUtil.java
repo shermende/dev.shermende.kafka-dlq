@@ -1,6 +1,6 @@
 package dev.shermende.kafkadlqretry.util;
 
-import dev.shermende.kafkadlqretry.model.KafkaDlqRetryConsumer;
+import dev.shermende.kafkadlqretry.model.DlqRetryConsumer;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -13,7 +13,7 @@ import java.util.Optional;
 public class AppUtil {
 
     public Integer extractCounter(
-        KafkaDlqRetryConsumer consumer,
+        DlqRetryConsumer consumer,
         ConsumerRecord<Object, Object> record
     ) {
         final Header header = record.headers().lastHeader(consumer.getRetryCounterHeader());

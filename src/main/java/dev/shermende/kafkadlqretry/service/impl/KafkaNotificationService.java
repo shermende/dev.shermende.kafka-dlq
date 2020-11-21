@@ -1,6 +1,6 @@
 package dev.shermende.kafkadlqretry.service.impl;
 
-import dev.shermende.kafkadlqretry.aop.annotation.Logging;
+import dev.shermende.kafkadlqretry.aop.annotation.Profiling;
 import dev.shermende.kafkadlqretry.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ public class KafkaNotificationService implements NotificationService {
 
     private final KafkaTemplate<Object, Object> template;
 
-    @Logging
+    @Profiling
     @Override
     public void send(
         ProducerRecord<Object, Object> record
