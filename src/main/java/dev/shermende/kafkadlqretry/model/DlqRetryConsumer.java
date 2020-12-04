@@ -39,7 +39,7 @@ public class DlqRetryConsumer implements Serializable {
      *
      */
     @NotEmpty
-    private String retryCounterHeader = "kafka-dlq-retry-count";
+    private String retryCounterHeader = "x-kafka-dlq-retry-count";
     /**
      *
      */

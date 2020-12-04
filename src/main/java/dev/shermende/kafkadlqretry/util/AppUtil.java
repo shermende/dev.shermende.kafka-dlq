@@ -20,13 +20,13 @@ public class AppUtil {
         return Optional.ofNullable(header).map(Header::value).map(String::new).map(AppUtil::parse).orElse(0);
     }
 
-    public Integer parse(
+    private Integer parse(
         String value
     ) {
         try {
             return Integer.valueOf(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e);
             return 0;
         }
     }

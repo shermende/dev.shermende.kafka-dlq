@@ -7,7 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -16,5 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 public class KafkaDlqRetryProperties implements Serializable {
     @Valid
-    private List<DlqRetryConsumer> consumers;
+    @NotEmpty(message = "DLQ consumers not defined. Examples: https://google.com")
+    private List<DlqRetryConsumer> consumers = new ArrayList<>();
 }

@@ -1,11 +1,11 @@
-package dev.shermende.kafkadlqretry.service.impl;
+package dev.shermende.kafkadlqretry.handler.single.impl;
 
-import dev.shermende.kafkadlqretry.aop.annotation.Profiling;
 import dev.shermende.kafkadlqretry.converter.ConsumerRecordErrorConverter;
+import dev.shermende.kafkadlqretry.gateway.impl.KafkaGateway;
+import dev.shermende.kafkadlqretry.handler.single.ConsumerRecordSingleHandler;
 import dev.shermende.kafkadlqretry.model.DlqRetryConsumer;
-import dev.shermende.kafkadlqretry.service.ConsumerRecordSingleService;
 import dev.shermende.kafkadlqretry.service.DlqRetryConsumerService;
-import dev.shermende.kafkadlqretry.service.NotificationService;
+import dev.shermende.support.spring.aop.logging.annotation.Logging;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -14,20 +14,20 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ConsumerRecordSingleErrorService implements ConsumerRecordSingleService {
+public class ConsumerRecordSingleErrorHandler implements ConsumerRecordSingleHandler {
 
-    private final NotificationService notificationService;
+    private final KafkaGateway gateway;
     private final DlqRetryConsumerService dlqRetryConsumerService;
     private final ConsumerRecordErrorConverter errorConverter;
 
-    @Profiling
+    @Logging
     @Override
-    public void process(
+    public void handle(
         ConsumerRecord<Object, Object> record
     ) {
         final DlqRetryConsumer consumer = dlqRetryConsumerService.findOneByTopic(record.topic()).orElseThrow();
-        notificationService.send(errorConverter.convert(consumer, record));
-        log.info("[Processed as error] [Record:{}]", record);
+        gateway.send(errorConverter.convert(consumer, record));
+        log.info("[Single record processed as error] [Record:{}]", record);
     }
 
 }

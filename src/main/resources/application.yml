@@ -8,7 +8,7 @@ spring:
   application:
     name: kafka-dlq-retry
   profiles:
-    active: default
+    active: profiling
   kafka:
     consumer:
       group-id: ${spring.application.name}
