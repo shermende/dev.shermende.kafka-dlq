@@ -1,3 +1,6 @@
+# environment for develop
+# project: kafka-dlq-retry
+# ./usr/bin/kafka-topics --create --replication-factor 1 --zookeeper zookeeper:2181 --partitions 10 --topic self-test
 version: '3'
 
 services:
@@ -11,7 +14,7 @@ services:
   kafka:
     image: confluentinc/cp-kafka:5.3.1
     expose:
-      - 9092
+      - 9091
     ports:
       - 9092:9092
     environment:
@@ -61,8 +64,9 @@ services:
   prometheus:
     image: prom/prometheus:latest
     network_mode: host
+    ports:
+      - 9090:9090
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-#./usr/bin/kafka-topics --create --replication-factor 1 --zookeeper zookeeper:2181 --partitions 10 --topic self-test

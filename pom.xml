@@ -92,6 +92,7 @@
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}-runner</finalName>
         <plugins>
             <!-- launch plugin -->
             <plugin>

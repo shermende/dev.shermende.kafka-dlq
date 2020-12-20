@@ -39,7 +39,7 @@ public class ConsumerRecordBatchRetryHandler implements ConsumerRecordBatchHandl
             log.error(e.getMessage(), e);
         } finally {
             records.forEach(var -> gateway.send(retryConverter.convert(counter, consumer, var)));
-            log.info("[Batch processed as retry] [Count:{}]", records.size());
+            log.info("[Batch processed as retry] [Round:{}] [Count:{}]", counter, records.size());
         }
     }
 

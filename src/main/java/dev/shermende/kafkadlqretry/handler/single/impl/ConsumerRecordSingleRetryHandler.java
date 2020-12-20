@@ -36,7 +36,7 @@ public class ConsumerRecordSingleRetryHandler implements ConsumerRecordSingleHan
             log.error(e.getMessage(), e);
         } finally {
             gateway.send(retryConverter.convert(counter, consumer, record));
-            log.info("[Single record processed as retry] [Record:{}]", record);
+            log.info("[Single record processed as retry] [Round:{}] [Record:{}]", counter, record);
         }
     }
 
