@@ -30,11 +30,6 @@
         <appender-ref ref="KAFKA"/>
     </appender>
 
-    <logger name="dev.shermende" level="debug" additivity="false">
-        <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="ASYNC"/>
-    </logger>
-
     <root level="info">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="ASYNC"/>

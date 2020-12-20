@@ -1,6 +1,5 @@
 package dev.shermende.kafkadlqretry.converter.impl;
 
-import dev.shermende.kafkadlqretry.aop.annotation.Profiling;
 import dev.shermende.kafkadlqretry.converter.ConsumerRecordErrorConverter;
 import dev.shermende.kafkadlqretry.model.DlqRetryConsumer;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConsumerRecordErrorConverterImpl implements ConsumerRecordErrorConverter {
 
-    @Profiling
+
     @Override
     public ProducerRecord<Object, Object> convert(
         DlqRetryConsumer consumer,

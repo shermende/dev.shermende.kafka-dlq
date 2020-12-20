@@ -1,8 +1,8 @@
-package dev.shermende.kafkadlqretry.factory.impl;
+package dev.shermende.kafkadlqretry.factory;
 
-import dev.shermende.kafkadlqretry.factory.AbstractFactory;
 import dev.shermende.kafkadlqretry.listener.BatchDlqMessageListener;
 import dev.shermende.kafkadlqretry.listener.SingleDlqMessageListener;
+import dev.shermende.support.spring.factory.AbstractFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,5 @@
 package dev.shermende.kafkadlqretry.service.impl;
 
-import dev.shermende.kafkadlqretry.aop.annotation.Profiling;
 import dev.shermende.kafkadlqretry.configuration.properties.KafkaDlqRetryProperties;
 import dev.shermende.kafkadlqretry.model.DlqRetryConsumer;
 import dev.shermende.kafkadlqretry.service.DlqRetryConsumerService;
@@ -18,12 +17,12 @@ public class DlqRetryConsumerServiceImpl implements DlqRetryConsumerService {
 
     private final KafkaDlqRetryProperties kafkaDlqRetryProperties;
 
-    @Profiling
     @Override
     @Cacheable(value = "dlq-retry-consumer", key = "#topic")
     public Optional<DlqRetryConsumer> findOneByTopic(
         String topic
     ) {
+        log.debug("[DlqRetryConsumer findOneByTopic] [{}]", topic);
         return kafkaDlqRetryProperties.getConsumers().stream()
             .filter(consumer -> consumer.getDlqTopic().equals(topic)).findFirst();
     }
