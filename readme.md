@@ -1,13 +1,10 @@
-# kafka dlq retry spring boot application
+# Kafka DLQ retry
 
-### docker-compose fast start
+### fast start with docker-compose
 
 ```
-# build jar
 $ ./mvnw clean package
-# run in docker
 $ docker-compose -f .dev/docker-compose-fast-start.yml -p kafka-dlq-retry-fast-start up --build -d
-# application logs
 $ docker-compose -f .dev/docker-compose-fast-start.yml -p kafka-dlq-retry-fast-start logs -f kafka-dlq-retry
 ```
 
