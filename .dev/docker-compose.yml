@@ -1,5 +1,5 @@
 # environment for develop
-# project: kafka-dlq-retry
+# docker-compose -f .dev/docker-compose.yml -p kafka-dlq-retry up --build -d
 # ./usr/bin/kafka-topics --create --replication-factor 1 --zookeeper zookeeper:2181 --partitions 10 --topic self-test
 version: '3'
 

@@ -1,5 +1,5 @@
 # fast start example
-# project: kafka-dlq-retry-self-test
+# docker-compose -f .dev/docker-compose-fast-start.yml -p kafka-dlq-retry-fast-start up --build -d
 version: '3'
 
 services:
@@ -49,5 +49,7 @@ services:
       dev.shermende.kafka-dlq-retry.consumers[0].error-topic: application.error
       dev.shermende.kafka-dlq-retry.consumers[0].delays: 200,300,400
       dev.shermende.kafka-dlq-retry.consumers[0].concurrency: 10
+    ports:
+      - 9999:9999
     depends_on:
       - kafka
