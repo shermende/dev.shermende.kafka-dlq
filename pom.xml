@@ -29,6 +29,7 @@
 
         <sonar.organization>shermende</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.projectName>dev.shermende.kafka-dlq-retry</sonar.projectName>
         <sonar.projectKey>shermende_dev.shermende.kafka-dlq-retry</sonar.projectKey>
     </properties>
 
@@ -115,7 +116,7 @@
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}-runner</finalName>
+        <finalName>application</finalName>
         <plugins>
             <!-- launch plugin -->
             <plugin>

@@ -42,7 +42,7 @@ public class SelfTestConfiguration {
         ConsumerRecord<Object, Object> record
     ) {
         try {
-            throw new IllegalArgumentException("some unexpected exception");
+            throw new IllegalArgumentException("this exception is demo");
         } catch (Exception e) {
             log.error(e.getMessage());
             template.send(
