@@ -34,18 +34,17 @@ public class DlqRetryConsumer implements Serializable {
      *
      */
     @NotEmpty
+    @Builder.Default
     private List<Integer> delays = Arrays.asList(60000, 120000, 180000);
     /**
      *
      */
+
     @NotEmpty
+    @Builder.Default
     private String retryCounterHeader = "x-kafka-dlq-retry-count";
     /**
      *
      */
     private Integer concurrency;
-    /**
-     *
-     */
-    private boolean batch;
 }

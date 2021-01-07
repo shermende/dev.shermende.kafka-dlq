@@ -1,13 +1,14 @@
 package dev.shermende.kafkadlqretry.configuration;
 
 import dev.shermende.kafkadlqretry.configuration.properties.KafkaDlqRetryProperties;
-import dev.shermende.kafkadlqretry.factory.MessageListenerFactory;
+import dev.shermende.kafkadlqretry.listener.DlqMessageListener;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
+import org.springframework.kafka.listener.ErrorHandler;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
@@ -20,7 +21,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequiredArgsConstructor
 public class KafkaDlqRetryConfiguration {
 
-    private final MessageListenerFactory listenerFactory;
+    private final ErrorHandler errorHandler;
+    private final DlqMessageListener messageListener;
     private final KafkaDlqRetryProperties dlqRetryProperties;
     private final ConcurrentKafkaListenerContainerFactory<Object, Object> factory;
     private final Map<String, ConcurrentMessageListenerContainer<Object, Object>> consumerContainers = new ConcurrentHashMap<>();
@@ -33,7 +35,9 @@ public class KafkaDlqRetryConfiguration {
                     // create container
                     final ConcurrentMessageListenerContainer<Object, Object> container = factory.createContainer(dlqRetryConsumer.getDlqTopic());
                     // set message listener
-                    container.setupMessageListener(listenerFactory.getInstance(dlqRetryConsumer.isBatch()));
+                    container.setupMessageListener(messageListener);
+                    // set error handler
+                    container.setErrorHandler(errorHandler);
                     // set concurrency options
                     Optional.ofNullable(dlqRetryConsumer.getConcurrency()).ifPresent(container::setConcurrency);
                     // put to map

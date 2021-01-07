@@ -11,7 +11,12 @@ spring:
     active: default
   kafka:
     consumer:
+      auto-offset-reset: earliest
       group-id: ${spring.application.name}
+#
+logging:
+  level:
+    dev.shermende.support.spring.aop.profiling: debug
 #
 management:
   metrics:
