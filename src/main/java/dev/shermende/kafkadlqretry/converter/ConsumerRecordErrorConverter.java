@@ -6,6 +6,9 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+/**
+ * Prepare kafka-message for send to error-topic
+ */
 @Slf4j
 @Component
 public class ConsumerRecordErrorConverter implements Converter<ConsumerRecordContext, ProducerRecord<Object, Object>> {

@@ -19,6 +19,7 @@ public class ConsumerRecordErrorHandler implements Handler<ConsumerRecordContext
 
     @Qualifier("consumerRecordErrorConverter")
     private final Converter<ConsumerRecordContext, ProducerRecord<Object, Object>> errorConverter;
+    @Qualifier("kafkaGateway")
     private final Gateway<Boolean, ProducerRecord<Object, Object>> gateway;
 
     @Logging

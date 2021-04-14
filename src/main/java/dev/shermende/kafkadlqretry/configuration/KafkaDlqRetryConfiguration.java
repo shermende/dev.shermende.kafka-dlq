@@ -5,6 +5,7 @@ import dev.shermende.kafkadlqretry.listener.DlqMessageListener;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
@@ -33,7 +34,7 @@ public class KafkaDlqRetryConfiguration {
             .ifPresent(kafkaDlqRetryConsumers -> kafkaDlqRetryConsumers
                 .forEach(dlqRetryConsumer -> {
                     // create container
-                    final ConcurrentMessageListenerContainer<Object, Object> container = factory.createContainer(dlqRetryConsumer.getDlqTopic());
+                    val container = factory.createContainer(dlqRetryConsumer.getDlqTopic());
                     // set message listener
                     container.setupMessageListener(messageListener);
                     // set error handler

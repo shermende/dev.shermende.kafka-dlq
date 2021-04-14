@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+/**
+ * Controls for remote management of profiling and logging
+ */
 @Slf4j
 @Configuration
 @Profile({"profiling"})

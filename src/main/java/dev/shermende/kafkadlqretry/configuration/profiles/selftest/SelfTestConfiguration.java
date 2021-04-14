@@ -20,6 +20,13 @@ import org.springframework.validation.annotation.Validated;
 import java.util.Collections;
 import java.util.UUID;
 
+/**
+ * Self test configuration
+ * Description:
+ * 1. Scheduler send message to main-topic
+ * 2. Consumer of main-topic throw exception, catch it and send to dlq-topic
+ * 3. Application should delay message and retry it to main-topic
+ */
 @Slf4j
 @Configuration
 @EnableScheduling

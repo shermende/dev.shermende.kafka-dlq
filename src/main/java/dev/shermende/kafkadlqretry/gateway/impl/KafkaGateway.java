@@ -5,6 +5,7 @@ import dev.shermende.kafkadlqretry.util.LogUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class KafkaGateway implements Gateway<Boolean, ProducerRecord<Object, Object>> {
 
+    @Qualifier("kafkaTemplate")
     private final KafkaTemplate<Object, Object> template;
 
     @Override

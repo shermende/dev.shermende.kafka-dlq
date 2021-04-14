@@ -22,7 +22,9 @@ public class ConsumerRecordRetryHandler implements Handler<ConsumerRecordContext
 
     @Qualifier("consumerRecordRetryConverter")
     private final Converter<ConsumerRecordContext, ProducerRecord<Object, Object>> retryConverter;
+    @Qualifier("consumerRecordDelayConverter")
     private final Converter<ConsumerRecordContext, Long> consumerRecordDelayConverter;
+    @Qualifier("kafkaGateway")
     private final Gateway<Boolean, ProducerRecord<Object, Object>> gateway;
 
     @Logging
@@ -37,7 +39,7 @@ public class ConsumerRecordRetryHandler implements Handler<ConsumerRecordContext
             log.error(e.getMessage(), e);
         } finally {
             gateway.send(retryConverter.convert(recordContext));
-            log.debug("[Record processed as retry] [Round:{}] [Record:{}]", recordContext.getCounter(), LogUtil.sanitize(recordContext.getRecord().value()));
+            log.debug("[Record processed as retry] [Round:{}] [Record:{}]", recordContext.getExceptionCounter(), LogUtil.sanitize(recordContext.getRecord().value()));
         }
     }
 

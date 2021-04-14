@@ -9,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.stereotype.Component;
 
+/**
+ * Handling strategy factory
+ */
 @Slf4j
 @Component
 public class ConsumerRecordHandlerFactory extends AbstractFactory<Boolean, Handler<ConsumerRecordContext>> {
@@ -21,9 +24,9 @@ public class ConsumerRecordHandlerFactory extends AbstractFactory<Boolean, Handl
 
     @Override
     protected void registration() {
-        // handler as error
+        // handler as error for true
         this.registry(true, ConsumerRecordErrorHandler.class);
-        // handler as retry
+        // handler as retry for false
         this.registry(false, ConsumerRecordRetryHandler.class);
     }
 

@@ -7,21 +7,22 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+/**
+ * Handle strategy resolver
+ * if count of exception more than size of delays then handle as error
+ * if count of exception less than size of delays then handle as retry
+ */
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class ProcessingStrategyConverter implements Converter<ConsumerRecordContext, Boolean> {
 
-    /**
-     * true - handle as error
-     * false - handle as retry
-     */
     @NotNull
     @Override
     public Boolean convert(
         ConsumerRecordContext recordContext
     ) {
-        return recordContext.getCounter() >= recordContext.getDlqRetryConsumer().getDelays().size();
+        return recordContext.getExceptionCounter() >= recordContext.getDlqRetryConsumer().getDelays().size();
     }
 
 }

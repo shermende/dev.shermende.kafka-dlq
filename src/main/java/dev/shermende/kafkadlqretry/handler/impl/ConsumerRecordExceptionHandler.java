@@ -17,6 +17,7 @@ public class ConsumerRecordExceptionHandler implements ErrorHandler {
 
     @Qualifier("consumerRecordErrorHandler")
     private final Handler<ConsumerRecordContext> handler;
+    @Qualifier("consumerRecordConverter")
     private final Converter<ConsumerRecord<Object, Object>, ConsumerRecordContext> recordContextConverter;
 
     @Override

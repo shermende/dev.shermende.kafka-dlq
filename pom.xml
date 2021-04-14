@@ -25,6 +25,7 @@
         <org.jetbrains.annotations.version>20.1.0</org.jetbrains.annotations.version>
         <logback-kafka-appender.version>0.2.0-RC2</logback-kafka-appender.version>
         <logstash-logback-encoder.version>6.4</logstash-logback-encoder.version>
+        <easy-random-core.version>5.0.0</easy-random-core.version>
         <jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>
 
         <sonar.organization>shermende</sonar.organization>
@@ -101,6 +102,12 @@
             <artifactId>logstash-logback-encoder</artifactId>
             <version>${logstash-logback-encoder.version}</version>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.jeasy</groupId>
+            <artifactId>easy-random-core</artifactId>
+            <version>${easy-random-core.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -5,6 +5,7 @@ import dev.shermende.kafkadlqretry.model.DlqRetryConsumer;
 import dev.shermende.kafkadlqretry.service.DlqRetryConsumerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class DlqRetryConsumerServiceImpl implements DlqRetryConsumerService {
 
+    @Qualifier("kafkaDlqRetryProperties")
     private final KafkaDlqRetryProperties kafkaDlqRetryProperties;
 
     @Override

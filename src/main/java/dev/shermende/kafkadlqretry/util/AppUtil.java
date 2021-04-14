@@ -3,6 +3,7 @@ package dev.shermende.kafkadlqretry.util;
 import dev.shermende.kafkadlqretry.model.DlqRetryConsumer;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.header.Header;
 
@@ -16,7 +17,7 @@ public class AppUtil {
         DlqRetryConsumer consumer,
         ConsumerRecord<Object, Object> record
     ) {
-        final Header header = record.headers().lastHeader(consumer.getRetryCounterHeader());
+        val header = record.headers().lastHeader(consumer.getRetryCounterHeader());
         return Optional.ofNullable(header).map(Header::value).map(String::new).map(AppUtil::parse).orElse(0);
     }
 
