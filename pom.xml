@@ -12,7 +12,7 @@
     <artifactId>kafka-retry</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>kafka-retry</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Kafka DLQ retry</description>
 
     <properties>
         <java.version>11</java.version>
